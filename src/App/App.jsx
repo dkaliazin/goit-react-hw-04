@@ -8,13 +8,16 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Loader from '../Loader/Loader';
 import ImageModal from '../ImageModal/ImageModal';
 import { Toaster } from 'react-hot-toast';
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 function App() {
   const [images, setImages] = useState([]);
   const [topicName, setTopicName] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [selectedImage, setselectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const handleSearch = async (newTopicName) => {
     setImages([]);
     setPage(1);
@@ -40,13 +43,22 @@ useEffect(() => {
     getImages();
   }
 }, [topicName, page]);
-
-    const openModalWindow = (imageSrc) => {
+  const [openModal, setOpenModal] = useState(false);
+  
+  const openModalWindow = (imageSrc) => {
+     if (!openModal) {
+    console.log("Opening modal with image:", imageSrc);
     setSelectedImage(imageSrc);
+    setOpenModal(true);
+  } else {
+    console.warn("Modal is already open");
+  }
   };
 
   const closeModalWindow = () => {
+    console.log("Closing modal");
     setSelectedImage(null);
+    setOpenModal(false);
   };
   return (
     <div className={css.container}>
@@ -59,14 +71,13 @@ useEffect(() => {
           <LoadMoreBtn onClick={handleLoadMore} />
         </>
       )}
-      {selectedImage && (
-        <ImageModal
-          isOpen={true}
-          imageSrc={selectedImage}
-          altDesc="Modal image"
-          onRequestClose={closeModalWindow}
-        />
-      )}
+      {selectedImage && openModal && (
+  <ImageModal
+    isOpen={openModal}
+    imageSrc={selectedImage}
+    onRequestClose={closeModalWindow}
+  />
+)}
       <Toaster />
     </div>
   )

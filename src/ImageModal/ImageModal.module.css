@@ -2,12 +2,12 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  background: none;
-  border: none;
-  padding: 0;
   transform: translate(-50%, -50%);
+  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
+  /* opacity: 0; */
+  transform: translate(-50%, -45%);
 }
 .modalimage {
   max-width: 100%;
-  max-height: 55vh;
+  max-height: 80vh;
 }
