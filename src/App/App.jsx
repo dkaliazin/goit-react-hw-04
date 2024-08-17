@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react'
 import SearchBar from '../SearchBar/SearchBar'
 import css from './App.module.css'
-import { ErrorMessage } from 'formik';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import axios from 'axios';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import Loader from '../Loader/Loader';
+import ImageModal from '../ImageModal/ImageModal';
+import { Toaster } from 'react-hot-toast';
 function App() {
   const [images, setImages] = useState([]);
   const [topicName, setTopicName] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [imageModalWindow, setImageModalWindow] = useState(false);
-  const [modalData, setModalData] = useState({});
+  const [selectedImage, setselectedImage] = useState(null);
   const handleSearch = async (newTopicName) => {
     setImages([]);
     setPage(1);
@@ -39,24 +41,36 @@ useEffect(() => {
   }
 }, [topicName, page]);
 
-  const handleImageModalWindow = (modalData) => {
-    setImageModalWindow(!imageModalWindow);
-    setModalData(modalData);
-  }
+    const openModalWindow = (imageSrc) => {
+    setSelectedImage(imageSrc);
+  };
+
+  const closeModalWindow = () => {
+    setSelectedImage(null);
+  };
   return (
     <div className={css.container}>
-      
       <SearchBar onSearch={handleSearch} />
+      {loading && <Loader/>}
+      {error && <ErrorMessage />}
       {images.length > 0 && (
         <>
-          <ImageGallery images={images} openModalWindow={handleImageModalWindow} />
+          <ImageGallery images={images} openModalWindow={openModalWindow} />
           <LoadMoreBtn onClick={handleLoadMore} />
         </>
-
       )}
-      
+      {selectedImage && (
+        <ImageModal
+          isOpen={true}
+          imageSrc={selectedImage}
+          altDesc="Modal image"
+          onRequestClose={closeModalWindow}
+        />
+      )}
+      <Toaster />
     </div>
   )
 }
-/*{error && <ErrorMessage/>}*/
+/*
+*/
 export default App
