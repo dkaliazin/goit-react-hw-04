@@ -49,7 +49,7 @@ useEffect(() => {
   const openModalWindow = (imageSrc) => {
      if (!openModal) {
       console.log("Opening modal with image:", imageSrc);
-      setSelectedImage(imageSrc);
+      setSelectedImage(imageSrc.urls.full);
       setOpenModal(true);
   } else {
     console.warn("Modal is already open");

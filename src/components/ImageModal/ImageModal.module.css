@@ -8,6 +8,6 @@
   transform: translate(-50%, -45%);
 }
 .modalimage {
-  max-width: 100%;
-  max-height: 80vh;
+  width: 600px;
+  height: auto;
 }

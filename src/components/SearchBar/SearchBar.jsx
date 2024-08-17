@@ -1,13 +1,21 @@
 import { Formik, Form, Field } from "formik";
 import css from "./SearchBar.module.css";
-
+import toast from 'react-hot-toast';
 export default function SearchBar({ onSearch }) {
   return (
     <header>
       <Formik
         initialValues={{ topicName: "" }}
         onSubmit={(values, actions) => {
-          onSearch(values.topicName);
+          const { topicName } = values;
+
+          if (topicName.trim() === "") {
+            toast.error("Please fill a search box"); 
+            actions.setSubmitting(false); 
+            return;
+          }
+
+          onSearch(topicName);
           actions.resetForm();
         }}
       >

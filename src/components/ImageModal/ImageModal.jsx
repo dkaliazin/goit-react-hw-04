@@ -1,6 +1,10 @@
 import css from "./ImageModal.module.css";
 import Modal from 'react-modal';
-export default function ImageModal({ isOpen, onRequestClose, imageSrc}) {
+export default function ImageModal({ isOpen, onRequestClose, imageSrc }) {
+    if (typeof imageSrc !== 'string') {
+        console.log('not string');
+        return null; 
+  }
     return (   
         <Modal
             isOpen={isOpen}
@@ -10,10 +14,7 @@ export default function ImageModal({ isOpen, onRequestClose, imageSrc}) {
             shouldCloseOnOverlayClick={true}
             ariaHideApp={true}
         >
-            <img src={imageSrc} alt="modal img" className={css.modalimage} />
-
-       
-        
+            <img src={imageSrc} alt="modal img" className={css.modalimage} />         
         </Modal>
     )
 }
