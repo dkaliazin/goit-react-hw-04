@@ -9,10 +9,9 @@ export default function ImageModal({ isOpen, onRequestClose, imageSrc}) {
             className={css.modalwindow}
             shouldCloseOnOverlayClick={true}
             ariaHideApp={true}
-        >{imageSrc &&
-            <>
+        >
             <img src={imageSrc} alt="modal img" className={css.modalimage} />
-            </>}
+
        
         
         </Modal>

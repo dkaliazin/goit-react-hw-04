@@ -43,6 +43,7 @@ useEffect(() => {
     getImages();
   }
 }, [topicName, page]);
+  //Modal
   const [openModal, setOpenModal] = useState(false);
   
   const openModalWindow = (imageSrc) => {
@@ -59,6 +60,7 @@ useEffect(() => {
     console.log("Closing modal");
     setSelectedImage(null);
     setOpenModal(false);
+  //Modal end
   };
   return (
     <div className={css.container}>
