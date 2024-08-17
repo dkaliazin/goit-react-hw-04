@@ -1,0 +1,9 @@
+.loadbtn {
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: black;
+  cursor: pointer;
+  font-size: 14px;
+}

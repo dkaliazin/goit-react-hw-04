@@ -1,0 +1,9 @@
+.gallerylist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  list-style-type: none;
+}
+.galleryitem {
+  width: calc((100%-5 * 5px) / 4);
+}

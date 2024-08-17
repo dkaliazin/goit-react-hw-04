@@ -4,10 +4,11 @@ import css from './App.module.css'
 import { ErrorMessage } from 'formik';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import axios from 'axios';
+import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 function App() {
   const [images, setImages] = useState([]);
   const [topicName, setTopicName] = useState("");
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [imageModalWindow, setImageModalWindow] = useState(false);
@@ -16,6 +17,9 @@ function App() {
     setImages([]);
     setPage(1);
     setTopicName(newTopicName);
+  }
+  const handleLoadMore = () => {
+    setPage(page + 1);
   }
 useEffect(() => {
   const getImages = async () => {
@@ -44,7 +48,11 @@ useEffect(() => {
       
       <SearchBar onSearch={handleSearch} />
       {images.length > 0 && (
-        <ImageGallery images={images} openModalWindow={handleImageModalWindow}/>
+        <>
+          <ImageGallery images={images} openModalWindow={handleImageModalWindow} />
+          <LoadMoreBtn onClick={handleLoadMore} />
+        </>
+
       )}
       
     </div>

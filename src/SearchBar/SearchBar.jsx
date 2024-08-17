@@ -11,14 +11,14 @@ export default function SearchBar({ onSearch }) {
           actions.resetForm();
         }}
       >
-        <Form>
+        <Form className={css.searchbar}>
           <Field
             type="text"
             name="topicName"
             autoComplete="off"
             placeholder="Search by name"
           />
-          <button type="submit">Search</button>
+          <button type="submit" className={css.button}>Search</button>
         </Form>
       </Formik>
     </header>

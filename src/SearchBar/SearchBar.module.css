@@ -1,0 +1,13 @@
+.button {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: 1px solid #000000;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  margin: 20px;
+}
+.searchbar {
+  margin: 15px auto;
+  display: flex;
+  align-items: center;
+}
